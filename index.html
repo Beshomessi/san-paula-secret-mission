@@ -333,8 +333,8 @@ function render(){
 selected = null;
 $("next").disabled = true;
 
-$("stepLabel").textContent = السؤال ${idx+1} من ${questions.length};
-$("bar").style.width = ${idx/questions.length*100}%;
+$("stepLabel").textContent = `السؤال ${idx+1} من ${questions.length}`;
+$("bar").style.width = `${idx/questions.length*100}%`;
 $("question").textContent = questions[idx].q;
 $("choices").innerHTML = "";
 
@@ -390,7 +390,7 @@ $("result").classList.remove("hidden");
 $("bar").style.width = "100%";
 
 /* النقاط تظهر لأول مرة هنا في النتيجة النهائية */
-$("finalScore").textContent = ${score}/50;
+$("finalScore").textContent = `${score}/50`;
 
 const winner = Object.entries(profile)
 .sort((a,b)=>b[1]-a[1])[0][0];
@@ -411,7 +411,7 @@ scent:[
 }[winner];
 
 $("resultTitle").textContent = data[0];
-$("resultText").textContent = يا ${player.name}، ${data[1]} مجموعك ${score} من 50 نقطة! 🔥;
+$("resultText").textContent = `يا ${player.name}، ${data[1]} مجموعك ${score} من 50 نقطة! 🔥`;
 $("savedStatus").textContent = "جاري حفظ النتيجة…";
 
 try{
@@ -431,7 +431,7 @@ $("savedStatus").textContent = "⚠️ النتيجة ظهرت على الشاش
 }
 
 $("share").onclick = async()=>{
-const text = أنا ${player.name} خلصت SANBOLA SECRET MISSION وطلعت: ${$("resultTitle").textContent} بنتيجة ${score}/50 💗 جربي التحدّي إنتِ كمان!;
+const text = `أنا ${player.name} خلصت SANBOLA SECRET MISSION وطلعت: ${$("resultTitle").textContent} بنتيجة ${score}/50 💗 جربي التحدّي إنتِ كمان!`;
 
 if(navigator.share){
 try{
