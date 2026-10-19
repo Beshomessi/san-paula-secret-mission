@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#170817">
+<title>San Paula | Secret Mission</title>
+<style>
+:root{--pink:#ff3d9a;--pink2:#ff83c1;--purple:#8c3cff;--bg:#100711;--card:#211023;--text:#fff5fb;--muted:#d6b8ce}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:radial-gradient(circle at 20% 0,#4a1240 0,transparent 35%),radial-gradient(circle at 90% 40%,#32114b 0,transparent 30%),var(--bg);color:var(--text);min-height:100vh}
+main{max-width:780px;margin:auto;padding:24px 16px 50px}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.logo{font-weight:900;font-size:clamp(24px,5vw,38px);letter-spacing:-1px;color:#fff}.logo span{color:var(--pink2)}.pill{border:1px solid #ff83c155;color:var(--pink2);border-radius:99px;padding:7px 12px;font-size:12px}
+.hero,.panel{background:linear-gradient(145deg,#2c132b,#180c1b);border:1px solid #ff83c133;border-radius:24px;padding:clamp(20px,5vw,34px);box-shadow:0 16px 50px #0005}
+.hero{text-align:center;position:relative;overflow:hidden}.eyebrow{color:var(--pink2);font-weight:800;font-size:13px;letter-spacing:1px}.hero h1{font-size:clamp(30px,7vw,54px);line-height:1.12;margin:12px 0}.hero p{color:var(--muted);line-height:1.9;margin:10px auto;max-width:570px}.gift{font-size:72px;filter:drop-shadow(0 0 22px #ff3d9a88);margin:10px}.btn{border:0;cursor:pointer;border-radius:14px;padding:14px 20px;font-size:16px;font-weight:850;color:#21091a;background:linear-gradient(90deg,var(--pink),var(--pink2));box-shadow:0 8px 24px #ff3d9a33}.btn.secondary{background:#ffffff0b;color:white;border:1px solid #ffffff26;box-shadow:none}.btn:disabled{opacity:.4;cursor:not-allowed}.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px}.progress{height:7px;background:#ffffff12;border-radius:99px;overflow:hidden;margin:18px 0 6px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--purple));transition:width .3s}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}.panel{margin-top:18px}.hidden{display:none!important}.question{font-size:23px;line-height:1.5;margin:8px 0 18px}.choices{display:grid;grid-template-columns:1fr;gap:10px}.choice{border:1px solid #ffffff22;background:#ffffff08;color:var(--text);border-radius:15px;padding:15px;text-align:right;cursor:pointer;font:inherit;transition:.15s}.choice:hover{border-color:var(--pink2);background:#ff3d9a12}.choice.selected{border-color:var(--pink);background:#ff3d9a22;box-shadow:inset 0 0 0 1px var(--pink)}.choice small{display:block;color:var(--muted);margin-top:4px}.notice{font-size:13px;color:var(--muted);line-height:1.8}.field{width:100%;background:#110912;color:white;border:1px solid #ffffff2b;border-radius:12px;padding:13px;font:inherit;margin:6px 0 14px}.field:focus{outline:2px solid var(--pink)}label{font-size:14px;color:#ffe2f1}.result-score{font-size:58px;font-weight:950;color:var(--pink2);text-align:center}.result-title{text-align:center;font-size:26px;margin:0}.result-copy{text-align:center;color:var(--muted);line-height:1.9}.foot{text-align:center;color:#b99ab3;font-size:12px;margin-top:24px;line-height:1.8}a{color:var(--pink2)}.tiny{font-size:11px;color:#b99ab3}
+@media(min-width:600px){.choices{grid-template-columns:1fr 1fr}.choice:last-child:nth-child(odd){grid-column:1/-1}}
+</style>
+</head>
+<body>
+<main>
+  <header class="brand"><div class="logo">San <span>Paula</span></div><div class="pill">SKIN CARE • MAKEUP</div></header>
+  <section class="hero" id="intro">
+    <div class="eyebrow">✦ مهمة تفاعلية من سان بولا ✦</div>
+    <div class="gift">🎁</div>
+    <h1>SECRET<br><span style="color:var(--pink2)">MISSION</span></h1>
+    <p>جاهزة تختبري ذوقك وتكتشفي أي فريق بيمثّلك؟ جاوبي على 5 أسئلة سريعة، اجمعي النقاط، واكتشفي نتيجتك في عالم الجمال.</p>
+    <p class="notice">اللعبة دي نسخة تجريبية تفاعلية. النتيجة للمتعة فقط، ولا تعني دخول سحب على جائزة إلا بعد إعلان شروط مسابقة رسمية من سان بولا.</p>
+    <button class="btn" id="start">ابدئي المهمة ✨</button>
+  </section>
+  <section class="panel hidden" id="game">
+    <div class="meta"><span id="stepLabel">السؤال 1 من 5</span><span>⭐ <b id="score">0</b> نقطة</span></div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <h2 class="question" id="question"></h2>
+    <div class="choices" id="choices"></div>
+    <div class="row"><button class="btn" id="next" disabled>السؤال التالي ←</button></div>
+    <p class="notice">اختاري إجابة واحدة. كل إجابة تكسبك نقاطًا وتقرّبك من اكتشاف فريقك.</p>
+  </section>
+  <section class="panel hidden" id="result">
+    <div class="eyebrow" style="text-align:center">MISSION COMPLETE</div>
+    <div class="result-score" id="finalScore">0/50</div>
+    <h2 class="result-title" id="resultTitle">ذوقك مميز!</h2>
+    <p class="result-copy" id="resultText"></p>
+    <div class="row"><button class="btn" id="share">شاركي نتيجتك 📲</button><button class="btn secondary" id="again">العبّي تاني</button></div>
+    <p class="notice">مشاركة النتيجة لا تسجّلك تلقائيًا في سحب أو مسابقة. لو سان بولا أعلنت جائزة، اتبعي شروط المشاركة المنشورة على صفحاتها الرسمية.</p>
+  </section>
+  <section class="panel">
+    <h3 style="margin-top:0">💗 اختاري طريقك مع سان بولا</h3>
+    <p class="notice">الموقع ده نموذج أولي مجاني يشتغل على الموبايل. لا يجمع اسمك أو رقمك أو بريدك، ولا يرسل إجاباتك إلى أي جهة.</p>
+  </section>
+  <footer class="foot">San Paula • Beauty brings us together ♡<br>نموذج أولي غير رسمي للنشر — أضيفي اللوجو الحقيقي وشروط المسابقة قبل إطلاقه.</footer>
+</main>
+<script>
+const questions=[
+ {q:"لو عندك 10 دقايق لنفسك، هتختاري إيه؟",a:[["روتين عناية يخلّي بشرتي مبسوطة","🧴 سكين كير",10],["لوك ميكب جديد أجربه","💄 ميكب",10],["ريحة حلوة تكمل يومي","🌸 بودي سبلاش",10]]},
+ {q:"إيه أكتر حاجة بتشدك في المنتج؟",a:[["مكوناته وفايدته","العناية أولًا",10],["لونه وشكله واللوك النهائي","التفاصيل بتفرق",10],["ريحته والإحساس اللي بيسيبُه","بصمتك الخاصة",10]]},
+ {q:"صاحبتك قالتلك اختاري هدية ليكي…",a:[["ماسك أو مرطب","لحظة عناية",10],["روج أو بلاشر","ألوان ومزاج",10],["بودي ميست","ريحة تفتكرك بيها",10]]},
+ {q:"اختاري كلمة شبهك النهارده:",a:[["نضارة","Glow",10],["جرأة","Bold",10],["انتعاش","Fresh",10]]},
+ {q:"لو سان بولا جهزتلك مفاجأة، تحبي تكون…",a:[["بوكس سكين كير","فريق العناية",10],["بوكس ميكب","فريق الألوان",10],["بوكس عطور وبودي سبلاش","فريق الروائح",10]]}
+];
+let idx=0,score=0,selected=null,profile={care:0,makeup:0,scent:0};
+const $=id=>document.getElementById(id);
+$("start").onclick=()=>{$("intro").classList.add("hidden");$("game").classList.remove("hidden");render()};
+function render(){selected=null;$("next").disabled=true;$("stepLabel").textContent=`السؤال ${idx+1} من ${questions.length}`;$("score").textContent=score;$("bar").style.width=`${idx/questions.length*100}%`;$("question").textContent=questions[idx].q;$("choices").innerHTML="";
+questions[idx].a.forEach((a,i)=>{const b=document.createElement("button");b.className="choice";b.innerHTML=`${a[0]}<small>${a[1]}</small>`;b.onclick=()=>{selected=i;[...$("choices").children].forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("next").disabled=false};$("choices").appendChild(b)})}
+$("next").onclick=()=>{if(selected===null)return;score+=questions[idx].a[selected][2];if(selected===0)profile.care++;if(selected===1)profile.makeup++;if(selected===2)profile.scent++;idx++;if(idx<questions.length)render();else finish()};
+function finish(){$("game").classList.add("hidden");$("result").classList.remove("hidden");$("bar").style.width="100%";$("finalScore").textContent=`${score}/50`;let winner=Object.entries(profile).sort((a,b)=>b[1]-a[1])[0][0];let data={care:["ملكة العناية 🧴","إنتِ من فريق العناية! بتحبي تدلّعي بشرتك وتختاري كل حاجة بعناية."],makeup:["نجمة الميكب 💄","إنتِ من فريق الألوان! بتحبي تجربي لوكات جديدة وتعبّري عن نفسك."],scent:["بصمة الانتعاش 🌸","إنتِ من فريق الروائح! بتحبي تكمّلي إطلالتك بلمسة مميزة."]}[winner];$("resultTitle").textContent=data[0];$("resultText").textContent=data[1]+" ابعتي نتيجتك لصاحباتك وشوفي كل واحدة طلعت من أي فريق!";$("score").textContent=score}
+$("again").onclick=()=>{idx=0;score=0;profile={care:0,makeup:0,scent:0};$("result").classList.add("hidden");$("intro").classList.remove("hidden")};
+$("share").onclick=async()=>{const text=`أنا خلصت SAN PAULA SECRET MISSION وطلعت: ${$("resultTitle").textContent} بنتيجة ${score}/50 💗 جربي اللعبة إنتِ كمان!`;if(navigator.share){try{await navigator.share({title:"San Paula Secret Mission",text,url:location.href})}catch(e){}}else if(navigator.clipboard){try{await navigator.clipboard.writeText(text+"\n"+location.href);alert("تم نسخ النتيجة. الصقيها في ستوري أو رسالة لصاحبتك.")}catch(e){prompt("انسخي النتيجة:",text+" "+location.href)}}else{prompt("انسخي النتيجة:",text+" "+location.href)}};
+</script>
+</body>
+</html>
